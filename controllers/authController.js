@@ -5,14 +5,14 @@ const register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        const userExists = await User.findOne({ 
-            $or: [{ email }, { username }] 
+        const userExists = await User.findOne({
+            $or: [{ email }, { username }]
         });
 
         if (userExists) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'User already exists' 
+            return res.status(400).json({
+                success: false,
+                message: 'User already exists'
             });
         }
 
@@ -24,9 +24,9 @@ const register = async (req, res) => {
 
         sendTokenResponse(user, 201, res);
     } catch (error) {
-        res.status(500).json({ 
-            success: false, 
-            message: error.message 
+        res.status(500).json({
+            success: false,
+            message: error.message
         });
     }
 };
@@ -35,36 +35,29 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Please provide email and password' 
-            });
-        }
-
         const user = await User.findOne({ email }).select('+password');
 
         if (!user) {
-            return res.status(401).json({ 
-                success: false, 
-                message: 'Invalid credentials' 
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid credentials'
             });
         }
 
         const isMatch = await user.matchPassword(password);
 
         if (!isMatch) {
-            return res.status(401).json({ 
-                success: false, 
-                message: 'Invalid credentials' 
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid credentials'
             });
         }
 
         sendTokenResponse(user, 200, res);
     } catch (error) {
-        res.status(500).json({ 
-            success: false, 
-            message: error.message 
+        res.status(500).json({
+            success: false,
+            message: error.message
         });
     }
 };

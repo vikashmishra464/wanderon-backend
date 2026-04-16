@@ -1,4 +1,4 @@
-# WanderOn - Secure Backend API
+# WanderOn - Secure Backend API#@
 
 This is the backend service for WanderOn, a robust authentication system. It focuses on security, performance, and scalable API architecture using Node.js, Express, and MongoDB.
 
