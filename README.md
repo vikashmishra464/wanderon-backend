@@ -1,78 +1,75 @@
-# WanderOn - Secure Authentication System
+# WanderOn - Secure Backend API
 
-A robust full-stack authentication system built with modern web technologies. This project focuses on security, performance, and a premium user experience.
+This is the backend service for WanderOn, a robust authentication system. It focuses on security, performance, and scalable API architecture using Node.js, Express, and MongoDB.
 
-## Features
+## 🚀 Features
 
-- **Secure Registration**: Server-side validation and password hashing using bcrypt.
-- **JWT Authentication**: Stateless session management using JSON Web Tokens.
-- **HttpOnly Cookies**: Prevents XSS attacks by storing tokens in secure, non-accessible cookies.
-- **Premium UI**: Glassmorphic design with smooth transitions using Framer Motion.
-- **Protected Routes**: Middleware-driven route protection on both frontend and backend.
+- **JWT-Based Authentication**: Stateless authentication using JSON Web Tokens.
+- **Secure Cookie Management**: Uses `httpOnly` and `secure` cookies to prevent XSS and CSRF attacks.
+- **Scalable MVC Pattern**: Organized structure with dedicated routes, controllers, and models.
+- **Input Validation**: Robust request body validation using `express-validator`.
+- **Security Headers**: Integrated `helmet` for enhanced HTTP header security.
+- **Error Handling**: Centralized error management for consistent API responses.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- **Backend**: Node.js, Express, MongoDB, Mongoose
-- **Frontend**: React, Vite, Framer Motion, Lucide Icons, Vanilla CSS
-- **Security**: JWT, BcryptJS, Helmet, Cookie-parser
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: MongoDB (via Mongoose)
+- **Security**: BcryptJS (Hashing), JWT, Helmet, Cookie-Parser
+- **Validation**: Express-Validator
 
-## Getting Started
+## 📂 Folder Structure
 
-### Prerequisites
+```text
+backend/
+├── config/        # Database and configuration files
+├── controllers/   # Business logic for API endpoints
+├── middleware/    # Authentication and security middlewares
+├── models/        # Mongoose schemas (User)
+├── routes/        # API route definitions
+└── index.js       # Entry point
+```
 
-- Node.js (v16+)
-- MongoDB (Local or Atlas)
+## 🔐 Environment Variables
 
-### Setup
+Create a `.env` file in the root of the `backend` directory:
 
-1. **Clone and Install**
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRE=24h
+COOKIE_EXPIRE=1
+NODE_ENV=development
+FRONTEND_URL=http://localhost:5173
+```
+
+## 🛤️ API Endpoints
+
+| Method | Endpoint | Description | Auth Required |
+| :--- | :--- | :--- | :--- |
+| POST | `/api/auth/register` | Register a new user | No |
+| POST | `/api/auth/login` | Authenticate user & get cookie | No |
+| GET | `/api/auth/logout` | Clear auth cookie | Yes |
+| GET | `/api/auth/me` | Get current user profile | Yes |
+
+## ⚡ Setup & Run
+
+1. **Install Dependencies**
    ```bash
-   # Install Backend dependencies
-   cd backend
-   npm install
-
-   # Install Frontend dependencies
-   cd ../frontend
    npm install
    ```
 
-2. **Environment Variables**
-   Create a `.env` file in the `backend` directory:
-   ```env
-   PORT=5000
-   MONGODB_URI=your_mongodb_uri
-   JWT_SECRET=your_jwt_secret
-   JWT_EXPIRE=24h
-   COOKIE_EXPIRE=1
-   NODE_ENV=development
-   ```
-
-3. **Run the Application**
+2. **Run Development Server**
    ```bash
-   # Run Backend (from /backend)
-   node server.js
-
-   # Run Frontend (from /frontend)
    npm run dev
    ```
 
-## Deployment
+3. **Production Mode**
+   ```bash
+   npm start
+   ```
 
-### Backend (Render)
-1. Create a new **Web Service** on Render.
-2. Connect your `wanderon-backend` repository.
-3. Set **Build Command**: `npm install`
-4. Set **Start Command**: `node index.js`
-5. Add **Environment Variables**:
-   - `MONGODB_URI`: Your MongoDB Atlas connection string.
-   - `JWT_SECRET`: A long, random string.
-   - `FRONTEND_URL`: Your Vercel app URL (e.g., `https://your-app.vercel.app`).
-   - `NODE_ENV`: `production`
-
-### Frontend (Vercel)
-1. Create a new **Project** on Vercel.
-2. Connect your `wanderon-frontend` repository.
-3. Vercel will automatically detect Vite.
-4. Add **Environment Variables**:
-   - `VITE_API_BASE_URL`: Your Render backend URL (e.g., `https://your-api.onrender.com/api`).
-5. Click **Deploy**.
+---
+*Developed with focus on modern security standards.*
