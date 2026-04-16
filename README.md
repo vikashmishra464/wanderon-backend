@@ -62,7 +62,7 @@ A robust full-stack authentication system built with modern web technologies. Th
 1. Create a new **Web Service** on Render.
 2. Connect your `wanderon-backend` repository.
 3. Set **Build Command**: `npm install`
-4. Set **Start Command**: `npm start`
+4. Set **Start Command**: `node index.js`
 5. Add **Environment Variables**:
    - `MONGODB_URI`: Your MongoDB Atlas connection string.
    - `JWT_SECRET`: A long, random string.
